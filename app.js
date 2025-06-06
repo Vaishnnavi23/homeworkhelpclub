@@ -22,7 +22,7 @@ async function checkUserRoleAndRedirect(userEmail) {
     if (doc.exists && doc.data().role === "teacher") {
       role = "teacher";
     }
-
+	alret("role :::: "+role)
     if (role === "teacher") {
       window.location.href = "teacher-dashboard.html";
     } else {
