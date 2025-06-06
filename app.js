@@ -18,7 +18,7 @@ async function checkUserRoleAndRedirect(userEmail) {
   alert("Checking user role for: " + userEmail); // ✅ This works
 
   try {
-    const docRef = firebase.firestore().collection('teachers').doc(email);
+    const docRef = firebase.firestore().collection('teachers').doc(userEmail);
     const doc = await docRef.get();
 
     if (doc.exists) {
