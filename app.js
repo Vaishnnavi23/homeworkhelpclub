@@ -22,6 +22,7 @@ async function checkUserRoleAndRedirect(userEmail) {
     const doc = await docRef.get();
 
     if (doc.exists) {
+      alert(doc.data())
       const role = doc.data().role;
       alert("Role is: " + role); // ✅ This also works
 
