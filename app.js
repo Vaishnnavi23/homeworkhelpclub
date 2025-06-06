@@ -15,22 +15,27 @@ const db = firebase.firestore();
 
 // ✅ Check Role and Redirect
 async function checkUserRoleAndRedirect(userEmail) {
+  alert("Checking user role for: " + userEmail); // ✅ This works
+
   try {
-    const doc = await db.collection("teachers").doc(userEmail).get();
-    let role = "student";
+    const docRef = firebase.firestore().collection('teachers').doc(userEmail);
+    const doc = await docRef.get();
 
-    if (doc.exists && doc.data().role === "teacher") {
-      role = "teacher";
-    }
-	alret("role :::: "+role)
-    if (role === "teacher") {
-      window.location.href = "teacher-dashboard.html";
+    if (doc.exists) {
+      const role = doc.data().role;
+      alert("Role is: " + role); // ✅ This also works
+
+      if (role === 'teacher') {
+        window.location.href = "teacher-dashboard.html";
+      } else {
+        window.location.href = "student-dashboard.html";
+      }
     } else {
-      window.location.href = "dashboard.html";
+      alert("No teacher doc found. Defaulting to student.");
+      window.location.href = "student-dashboard.html";
     }
-
-  } catch (err) {
-    console.error("Role check error: ", err);
+  } catch (error) {
+    alert("Error checking role: " + error.message);
   }
 }
 
