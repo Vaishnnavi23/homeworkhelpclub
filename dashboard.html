@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Homework Help Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+    }
+
+    header {
+      background-color: #2a4365;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .feature-button {
+      background-color: #3182ce;
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .feature-button:hover {
+      background-color: #2b6cb0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Student Dashboard</h1>
+  </header>
+
+  <div class="container">
+    <button class="feature-button" onclick="location.href='ask-doubt.html'">
+      <i class="fas fa-question-circle"></i> Submit a Doubt
+    </button>
+    
+    <button class="feature-button" onclick="location.href='request-worksheet.html'">
+      <i class="fas fa-file-alt"></i> Request a Worksheet
+    </button>
+    
+    <button class="feature-button" onclick="location.href='flashcards.html'">
+      <i class="fas fa-clone"></i> Access Flashcards
+    </button>
+    
+    <button class="feature-button" onclick="location.href='take-test.html'">
+      <i class="fas fa-pen-square"></i> Take a Practice Test
+    </button>
+  </div>
+
+</body>
+</html>

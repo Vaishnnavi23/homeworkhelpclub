@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homework Help Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background-color: #4f46e5;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin: 0.5rem 0 0.25rem;
+    }
+    input, textarea, select, button {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #4f46e5;
+      color: white;
+      margin-top: 1rem;
+      cursor: pointer;
+      border: none;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Homework Help Club</h1>
+    <p>Quick help for students – anytime, anywhere</p>
+  </header>
+  <div class="container">
+    <h2>Submit Your Doubt</h2>
+    <form name="submit-to-google-sheet">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="class">Class</label>
+      <select id="class" name="class" required>
+        <option value="">Select Class</option>
+        <option value="4">Class 4</option>
+        <option value="5">Class 5</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+      </select>
+
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" required />
+
+      <label for="question">Your Question / Doubt</label>
+      <textarea id="question" name="question" rows="4" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <p id="response-msg" style="margin-top:1rem; color: green;"></p>
+  </div>
+  <footer>
+    &copy; 2025 Homework Help Club. All rights reserved.
+  </footer>
+
+  <script>
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById('response-msg');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch('https://script.google.com/macros/s/AKfycbyunJ5wzo_gi1lQOMVX0yp0vTjami-RJE4AwYIhqetP776ZyAd6Ln4sWds9cbjnXgKG/exec/exec', {
+        method: 'POST',
+        body: new FormData(form)
+      })
+        .then(response => {
+          msg.innerHTML = "Thanks! We'll get back to you soon.";
+          form.reset();
+        })
+        .catch(error => {
+          msg.innerHTML = "Something went wrong. Try again later.";
+          console.error('Error!', error.message);
+        });
+    });
+  </script>
+</body>
+</html>

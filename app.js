@@ -1,0 +1,70 @@
+// ✅ Initialize Firebase BEFORE using `auth` or `db`
+const firebaseConfig = {
+  apiKey: "AIzaSyBWSF-TDsIoZHlMLJjJXYPQ5pEcYed_F1I",
+  authDomain: "homeworkhelp-a354d.firebaseapp.com",
+  projectId: "homeworkhelp-a354d",
+  appId: "1:276571213270:web:c24f7d39343cd7e366a877"
+};
+
+// ✅ Initialize App
+firebase.initializeApp(firebaseConfig);
+
+// ✅ Initialize Auth and Firestore (make sure this comes after initializeApp)
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// ✅ Check Role and Redirect
+async function checkUserRoleAndRedirect(userEmail) {
+  try {
+    const doc = await db.collection("teachers").doc(userEmail).get();
+    let role = "student";
+
+    if (doc.exists && doc.data().role === "teacher") {
+      role = "teacher";
+    }
+
+    if (role === "teacher") {
+      window.location.href = "teacher-dashboard.html";
+    } else {
+      window.location.href = "dashboard.html";
+    }
+
+  } catch (err) {
+    console.error("Role check error: ", err);
+  }
+}
+
+// ✅ Signup
+function signup() {
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      checkUserRoleAndRedirect(userCredential.user.email);
+    })
+    .catch(err => {
+      document.getElementById("message").innerText = err.message;
+    });
+}
+
+// ✅ Login
+function login() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      checkUserRoleAndRedirect(userCredential.user.email);
+    })
+    .catch(err => {
+      document.getElementById("message").innerText = err.message;
+    });
+}
+
+// ✅ Logout
+function logout() {
+  auth.signOut().then(() => {
+    window.location.href = "login.html";
+  });
+}
