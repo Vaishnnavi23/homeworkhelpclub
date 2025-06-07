@@ -25,14 +25,13 @@ async function checkUserRoleAndRedirect(userEmail) {
      
       const role = doc.data().role;
       document.getElementById("userEmail").value = userEmail;
-
       if (role === 'teacher') {
         window.location.href = "teacher-dashboard.html";
       } else {
         window.location.href = "student-dashboard.html";
       }
     } else {
-      alert("No teacher doc found. Defaulting to student.");
+   
       window.location.href = "student-dashboard.html";
     }
   } catch (error) {
