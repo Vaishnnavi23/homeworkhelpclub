@@ -13,6 +13,12 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    document.getElementById("userEmail").value = user.userEmail;
+  }
+});
+
 // ✅ Check Role and Redirect
 async function checkUserRoleAndRedirect(userEmail) {
 
@@ -24,7 +30,7 @@ async function checkUserRoleAndRedirect(userEmail) {
     if (doc.exists) {
      
       const role = doc.data().role;
-      document.getElementById("userEmail").value = userEmail;
+     
       if (role === 'teacher') {
         window.location.href = "teacher-dashboard.html";
       } else {
