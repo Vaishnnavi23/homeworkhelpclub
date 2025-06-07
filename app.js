@@ -16,6 +16,8 @@ const db = firebase.firestore();
 auth.onAuthStateChanged((user) => {
   if (user) {
     document.getElementById("userEmail").value = user.userEmail;
+    alert( document.getElementById("userEmail").getValue());
+    
   }
 });
 
