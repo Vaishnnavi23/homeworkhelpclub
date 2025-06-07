@@ -15,16 +15,16 @@ const db = firebase.firestore();
 
 // ✅ Check Role and Redirect
 async function checkUserRoleAndRedirect(userEmail) {
-  alert("Checking user role for: " + userEmail); // ✅ This works
+
 
   try {
     const docRef = firebase.firestore().collection('teachers').doc(userEmail);
     const doc = await docRef.get();
 
     if (doc.exists) {
-      alert(doc.data())
+     
       const role = doc.data().role;
-      alert("Role is: " + role); // ✅ This also works
+      document.getElementById("userEmail").value = userEmail;
 
       if (role === 'teacher') {
         window.location.href = "teacher-dashboard.html";
