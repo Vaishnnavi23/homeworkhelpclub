@@ -21,7 +21,7 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-getName()
+function getName()
 {
   alert("get name function");
   alert(sessionStorage.getItem(userEmail));
