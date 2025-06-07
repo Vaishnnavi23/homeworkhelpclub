@@ -21,6 +21,13 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
+getName()
+{
+  alert("get name function");
+  alert(sessionStorage.getItem(userEmail));
+
+}
+
 // ✅ Check Role and Redirect
 async function checkUserRoleAndRedirect(userEmail) {
 
@@ -55,6 +62,7 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       checkUserRoleAndRedirect(userCredential.user.email);
+      sessionStorage.setItem("userEmail", userEmail);
     })
     .catch(err => {
       document.getElementById("message").innerText = err.message;
