@@ -78,8 +78,8 @@ async function checkUserRoleAndRedirect(userEmail) {
     });
 }*/
 
+
 function signup() {
- function signup() {
   alert("Inside signup");
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
@@ -112,7 +112,8 @@ function signup() {
     });
 }
 
-}
+
+
 
 
 // ✅ Login
