@@ -39,7 +39,7 @@ async function checkUserRoleAndRedirect(userEmail) {
     if (doc.exists) {
      
       const role = doc.data().role;
-     
+      sessionStorage.setItem("userEmail", userEmail);
       if (role === 'teacher') {
         window.location.href = "teacher-dashboard.html";
       } else {
@@ -62,7 +62,7 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       checkUserRoleAndRedirect(userCredential.user.email);
-      sessionStorage.setItem("userEmail", userEmail);
+     
     })
     .catch(err => {
       document.getElementById("message").innerText = err.message;
