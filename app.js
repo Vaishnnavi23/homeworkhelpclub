@@ -78,6 +78,17 @@ function signup() {
     });
 }
 
+function signup() {
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+  const role = document.querySelector('input[name="role"]:checked')?.value;
+  const grade = document.getElementById("gradeField").value || null;
+
+  if (!role) {
+    document.getElementById("message").innerText = "Please select a role (student or teacher)";
+    return;
+  }
+
 // ✅ Login
 function login() {
   const email = document.getElementById("loginEmail").value;
