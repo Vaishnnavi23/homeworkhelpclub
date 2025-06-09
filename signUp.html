@@ -37,7 +37,20 @@
     <label><input type="radio" name="role" value="student" onchange="toggleGrade()"> I am a Student</label>
     <label><input type="radio" name="role" value="teacher" onchange="toggleGrade()"> I am a Teacher</label>
 
-    <input type="text" id="gradeField" placeholder="Enter your Grade" class="hidden" />
+   <select id="gradeField" class="hidden">
+  <option value="">Select Grade</option>
+  <option value="Grade 1">Grade 1</option>
+  <option value="Grade 2">Grade 2</option>
+  <option value="Grade 3">Grade 3</option>
+  <option value="Grade 4">Grade 4</option>
+  <option value="Grade 5">Grade 5</option>
+  <option value="Grade 6">Grade 6</option>
+  <option value="Grade 7">Grade 7</option>
+  <option value="Grade 8">Grade 8</option>
+</select>
+
+    <input type="tel" id="phoneNumber" placeholder="Whatsapp Number" class="hidden" />
+
 
     <button onclick="signup()">Sign Up</button>
     <p><a href="login.html">Already have an account? Log in</a></p>
