@@ -24,7 +24,7 @@ auth.onAuthStateChanged((user) => {
 function getName()
 {
   alert("get name function");
-  alert(sessionStorage.getItem(userEmail));
+  alert(sessionStorage.getItem("userEmail"));
 
 }
 
@@ -39,7 +39,9 @@ async function checkUserRoleAndRedirect(userEmail) {
     if (doc.exists) {
      
       const role = doc.data().role;
+      alert("userEmail 1 :"+userEmail)
       sessionStorage.setItem("userEmail", userEmail);
+      alert("Session :::"+sessionStorage.getItem("userEmail"));
       if (role === 'teacher') {
         window.location.href = "teacher-dashboard.html";
       } else {
