@@ -12,36 +12,20 @@ firebase.initializeApp(firebaseConfig);
 // ✅ Initialize Auth and Firestore (make sure this comes after initializeApp)
 const auth = firebase.auth();
 const db = firebase.firestore();
-
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    document.getElementById("userEmail").value = user.userEmail;
-    alert( document.getElementById("userEmail").getValue());
-    
-  }
-});
-
 function getName()
 {
-  alert("get name function");
-  alert(sessionStorage.getItem("userEmail"));
   document.getElementById("userEmail").value = sessionStorage.getItem("userEmail");
 
 }
 
 // ✅ Check Role and Redirect
 async function checkUserRoleAndRedirect(userEmail) {
-
-
   try {
     const docRef = firebase.firestore().collection('teachers').doc(userEmail);
     const doc = await docRef.get();
-     alert("userEmail 1 :"+userEmail)
       sessionStorage.setItem("userEmail", userEmail);
-      alert("Session :::"+sessionStorage.getItem("userEmail"));
 
-    if (doc.exists) {
-     
+    if (doc.exists) {     
       const role = doc.data().role;
       alert("userEmail 1 :"+userEmail)
       sessionStorage.setItem("userEmail", userEmail);
@@ -67,9 +51,28 @@ function signup() {
 
   auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      checkUserRoleAndRedirect(userCredential.user.email);
-     
+      const user = userCredential.user;
+
+      // Save additional user data in Firestore
+      return db.collection("users").doc(user.email).set({
+        email: user.email,
+        role: role,
+        grade: role === 'student' ? grade : null,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
     })
+    .then(() => {
+      // Redirect to appropriate dashboard
+      if (role === "teacher") {
+        window.location.href = "teacher-dashboard.html";
+      } else {
+        window.location.href = "dashboard.html";
+      }
+    })
+    .catch((err) => {
+      document.getElementById("message").innerText = err.message;
+    });
+}
     .catch(err => {
       document.getElementById("message").innerText = err.message;
     });
