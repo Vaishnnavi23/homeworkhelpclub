@@ -25,6 +25,7 @@ function getName()
 {
   alert("get name function");
   alert(sessionStorage.getItem("userEmail"));
+  document.getElementById("userEmail").value = sessionStorage.getItem("userEmail");
 
 }
 
