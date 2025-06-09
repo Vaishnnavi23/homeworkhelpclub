@@ -27,9 +27,9 @@ async function checkUserRoleAndRedirect(userEmail) {
 
     if (doc.exists) {     
       const role = doc.data().role;
-      alert("userEmail 1 :"+userEmail)
+      
       sessionStorage.setItem("userEmail", userEmail);
-      alert("Session :::"+sessionStorage.getItem("userEmail"));
+    
       if (role === 'teacher') {
         window.location.href = "teacher-dashboard.html";
       } else {
@@ -103,8 +103,9 @@ function signup() {
       });
     })
     .then(() => {
+      checkUserRoleAndRedirect(user.email)
       // Redirect after signup
-      if (role === "teacher") {
+    /*  if (role === "teacher") {
         window.location.href = "teacher-dashboard.html";
       } else {
         window.location.href = "student-dashboard.html";
@@ -112,7 +113,7 @@ function signup() {
     })
     .catch((err) => {
       document.getElementById("message").innerText = err.message;
-    });
+    });*/
 }
 
 
