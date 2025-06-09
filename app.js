@@ -21,7 +21,8 @@ function getName()
 // ✅ Check Role and Redirect
 async function checkUserRoleAndRedirect(userEmail) {
   try {
-    const docRef = firebase.firestore().collection('teachers').doc(userEmail);
+   const docRef = firebase.firestore().collection('teachers').doc(userEmail);
+
     const doc = await docRef.get();
       sessionStorage.setItem("userEmail", userEmail);
 
