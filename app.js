@@ -12,10 +12,11 @@ firebase.initializeApp(firebaseConfig);
 // ✅ Initialize Auth and Firestore (make sure this comes after initializeApp)
 const auth = firebase.auth();
 const db = firebase.firestore();
-function getName()
+function getDetails()
 {
   document.getElementById("userEmail").value = sessionStorage.getItem("userEmail");
-
+  document.getElementById("grade").value = sessionStorage.getItem("grade");
+  document.getElementById("phoneNumber").value = sessionStorage.getItem("phoneNumber");
 }
 
 // ✅ Check Role and Redirect
@@ -44,47 +45,12 @@ async function checkUserRoleAndRedirect(userEmail) {
   }
 }
 
-// ✅ Signup
-/*function signup() {
-  const email = document.getElementById("signupEmail").value;
-  const password = document.getElementById("signupPassword").value;
-
-  auth.createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-
-      // Save additional user data in Firestore
-      return db.collection("users").doc(user.email).set({
-        email: user.email,
-        role: role,
-        grade: role === 'student' ? grade : null,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    })
-    .then(() => {
-      // Redirect to appropriate dashboard
-      if (role === "teacher") {
-        window.location.href = "teacher-dashboard.html";
-      } else {
-        window.location.href = "dashboard.html";
-      }
-    })
-    .catch((err) => {
-      document.getElementById("message").innerText = err.message;
-    });
-}
-    .catch(err => {
-      document.getElementById("message").innerText = err.message;
-    });
-}*/
-
-
 function signup() {
-  alert("Inside signup");
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
   const role = document.querySelector('input[name="role"]:checked')?.value;
   const grade = document.getElementById("gradeField")?.value || null;
+  const phoneNumber = document.getElementById("phoneNumber")?.value;
 
   if (!role) {
     document.getElementById("message").innerText = "Please select a role (student or teacher)";
@@ -94,17 +60,15 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-
-      // Store user info in Firestore
       return db.collection("users").doc(user.email).set({
         email: user.email,
         role: role,
         grade: role === 'student' ? grade : null,
+        phoneNumber : phoneNumber,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
     })
     .then(() => {
-      // Redirect based on role
       checkUserRoleAndRedirect(email);
     })
     .catch((err) => {
