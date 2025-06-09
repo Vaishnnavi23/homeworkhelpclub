@@ -79,17 +79,42 @@ async function checkUserRoleAndRedirect(userEmail) {
 }*/
 
 function signup() {
-  alert("Inside signup);
+  alert("Inside signup");
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
   const role = document.querySelector('input[name="role"]:checked')?.value;
-  const grade = document.getElementById("gradeField").value || null;
+  const grade = document.getElementById("gradeField")?.value || null;
 
   if (!role) {
     document.getElementById("message").innerText = "Please select a role (student or teacher)";
     return;
   }
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+
+      // Store user info in Firestore
+      return db.collection("users").doc(user.email).set({
+        email: user.email,
+        role: role,
+        grade: role === 'student' ? grade : null,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    })
+    .then(() => {
+      // Redirect after signup
+      if (role === "teacher") {
+        window.location.href = "teacher-dashboard.html";
+      } else {
+        window.location.href = "student-dashboard.html";
+      }
+    })
+    .catch((err) => {
+      document.getElementById("message").innerText = err.message;
+    });
 }
+
 
 // ✅ Login
 function login() {
