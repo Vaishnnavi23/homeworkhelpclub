@@ -60,12 +60,7 @@
 </head>
  
 <body>
-   <script>
-    window.onload = function () {
-      alert("test")
-  getName(); // Replace with your function
-};
-  </script>
+   
   <header>
     <h1>Homework Help Club</h1>
     <p>Quick help for students – anytime, anywhere</p>
@@ -105,6 +100,12 @@
   <script>
     const form = document.forms['submit-to-google-sheet'];
     const msg = document.getElementById('response-msg');
+    
+    window.onload = function () {
+      alert("test")
+  getName(); // Replace with your function
+};
+ 
 
     form.addEventListener('submit', e => {
       e.preventDefault();
