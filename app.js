@@ -45,7 +45,7 @@ async function checkUserRoleAndRedirect(userEmail) {
 }
 
 // ✅ Signup
-function signup() {
+/*function signup() {
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
 
@@ -76,7 +76,7 @@ function signup() {
     .catch(err => {
       document.getElementById("message").innerText = err.message;
     });
-}
+}*/
 
 function signup() {
   const email = document.getElementById("signupEmail").value;
