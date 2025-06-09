@@ -24,12 +24,13 @@ async function checkUserRoleAndRedirect(userEmail) {
   try {
   const docRef = db.collection('users').doc(userEmail);
   const doc = await docRef.get();
-      sessionStorage.setItem("userEmail", userEmail);
+   
 
     if (doc.exists) {     
       const role = doc.data().role;
       
-      sessionStorage.setItem("userEmail", userEmail);
+   
+      
     
       if (role === 'teacher') {
         window.location.href = "teacher-dashboard.html";
@@ -51,7 +52,9 @@ function signup() {
   const role = document.querySelector('input[name="role"]:checked')?.value;
   const grade = document.getElementById("gradeField")?.value || null;
   const phoneNumber = document.getElementById("phoneNumber")?.value;
-
+  sessionStorage.setItem("phoneNumber",phoneNumber);
+  sessionStorage.setItem("grade",grade);
+  sessionStorage.setItem("userEmail",email);
   if (!role) {
     document.getElementById("message").innerText = "Please select a role (student or teacher)";
     return;
