@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="app.js" defer></script>
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Sign Up</h2>
+    <input type="email" id="signupEmail" placeholder="Email" />
+    <input type="password" id="signupPassword" placeholder="Password" />
+
+    <label><input type="radio" name="role" value="student" onchange="toggleGrade()"> I am a Student</label>
+    <label><input type="radio" name="role" value="teacher" onchange="toggleGrade()"> I am a Teacher</label>
+
+    <input type="text" id="gradeField" placeholder="Enter your Grade" class="hidden" />
+
+    <button onclick="signup()">Sign Up</button>
+    <p><a href="login.html">Already have an account? Log in</a></p>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    function toggleGrade() {
+      const role = document.querySelector('input[name="role"]:checked').value;
+      const gradeField = document.getElementById('gradeField');
+      gradeField.classList.toggle('hidden', role !== 'student');
+    }
+  </script>
+</body>
+</html>
