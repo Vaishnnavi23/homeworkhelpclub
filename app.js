@@ -79,6 +79,7 @@ async function checkUserRoleAndRedirect(userEmail) {
 }*/
 
 function signup() {
+ function signup() {
   alert("Inside signup");
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
@@ -103,17 +104,14 @@ function signup() {
       });
     })
     .then(() => {
-      checkUserRoleAndRedirect(user.email)
-      // Redirect after signup
-    /*  if (role === "teacher") {
-        window.location.href = "teacher-dashboard.html";
-      } else {
-        window.location.href = "student-dashboard.html";
-      }
+      // Redirect based on role
+      checkUserRoleAndRedirect(email);
     })
     .catch((err) => {
       document.getElementById("message").innerText = err.message;
-    });*/
+    });
+}
+
 }
 
 
