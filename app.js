@@ -79,6 +79,7 @@ async function checkUserRoleAndRedirect(userEmail) {
 }*/
 
 function signup() {
+  alert("Inside signup);
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
   const role = document.querySelector('input[name="role"]:checked')?.value;
@@ -88,6 +89,7 @@ function signup() {
     document.getElementById("message").innerText = "Please select a role (student or teacher)";
     return;
   }
+}
 
 // ✅ Login
 function login() {
